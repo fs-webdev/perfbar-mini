@@ -1,0 +1,231 @@
+/* Disable metrics we don't use, to keep it simple */
+#perfBar-metric-numReqs,
+#perfBar-metric-respnseDuration,
+#perfBar-metric-requestDuration,
+#perfBar-metric-redirectCount,
+#perfBar-metric-loadEventTime,
+#perfBar-metric-domContentLoaded,
+#perfBar-metric-processing,
+#perfBar-metric-numOfEl,
+#perfBar-metric-cssCount,
+#perfBar-metric-jsCount,
+#perfBar-metric-imgCount,
+#perfBar-metric-dataURIImagesCount,
+#perfBar-metric-inlineCSSCount,
+#perfBar-metric-inlineJSCount,
+#perfBar-metric-thirdCSS,
+#perfBar-metric-thirdJS,
+#perfBar-metric-frontEnd,
+#perfBar-metric-backEnd {
+  display: none;
+}
+/* Disable metrics we don't use, to keep it simple */
+.ubermode {
+  #perfBar-metric-numReqs,
+  #perfBar-metric-respnseDuration,
+  #perfBar-metric-requestDuration,
+  #perfBar-metric-redirectCount,
+  #perfBar-metric-loadEventTime,
+  #perfBar-metric-domContentLoaded,
+  #perfBar-metric-processing,
+  #perfBar-metric-numOfEl,
+  #perfBar-metric-cssCount,
+  #perfBar-metric-jsCount,
+  #perfBar-metric-imgCount,
+  #perfBar-metric-dataURIImagesCount,
+  #perfBar-metric-inlineCSSCount,
+  #perfBar-metric-inlineJSCount,
+  #perfBar-metric-thirdCSS,
+  #perfBar-metric-thirdJS,
+  #perfBar-metric-frontEnd,
+  #perfBar-metric-backEnd {
+    display: block;
+  }
+}
+/* change perfbar styling a bit */
+/* hide slideup bar and show stats bar */
+#perfBar {
+  .perfBar-bar {
+    display: none;
+  }
+  .perfBar-stats {
+    display: flex;
+    background: #363a41;
+    padding-top: 10px;
+  }
+  .perfBar-stats ul {
+    /*height: 45px;
+    min-height: 100px;*/
+    display: flex;
+    margin-top: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .perfBar-stats li {
+    float: none;
+    height: inherit;
+    padding: 0 15px;
+  }
+  .perfBar-value {
+    font-size: 16px !important;
+  }
+  .perfBar-switches {
+    padding: 0;
+    margin: 0 auto 10px;
+    color: #404040;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .perfBar-switches > div {
+    padding: 5px 10px;
+  }
+  .perfBar-stat > .perfBar-label {
+    margin: 0;
+    line-height: 1.5em;
+  }
+  .perfBar-valueUnit {
+    color: #fff;
+  }
+  .perfBar-valueUnit.is-good {
+    color: #00AD61;
+  }
+  .perfBar-valueUnit.is-bad {
+    color: #FF3535;
+  }
+  .perfBar-switches .perfBar-label {
+    margin: 0 0 2px;
+  }
+  /* Switch design from: http://codepen.io/Thibaut/pen/iomak */
+  .switch {
+    position: relative;
+    height: 26px;
+    width: 120px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  }
+  .switch-label {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 58px;
+    line-height: 26px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+  }
+  .switch-label:active {
+    font-weight: bold;
+  }
+  .switch-label-off {
+    padding-left: 2px;
+  }
+  .switch-label-on {
+    padding-right: 2px;
+  }
+  .switch-input {
+    display: none;
+  }
+  .switch-input:checked + .switch-label {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.65);
+    text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+    -webkit-transition: 0.15s ease-out;
+    -moz-transition: 0.15s ease-out;
+    -o-transition: 0.15s ease-out;
+    transition: 0.15s ease-out;
+  }
+  .switch-input:checked + .switch-label-on ~ .switch-selection {
+    /* Note: left: 50% doesn't transition in WebKit */
+    left: 60px;
+  }
+  .switch-selection {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 2px;
+    width: 58px;
+    height: 22px;
+    background: #65bd63;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(top, #9dd993, #65bd63);
+    background-image: -moz-linear-gradient(top, #9dd993, #65bd63);
+    background-image: -o-linear-gradient(top, #9dd993, #65bd63);
+    background-image: linear-gradient(to bottom, #9dd993, #65bd63);
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+    -webkit-transition: left 0.15s ease-out;
+    -moz-transition: left 0.15s ease-out;
+    -o-transition: left 0.15s ease-out;
+    transition: left 0.15s ease-out;
+  }
+  .switch-blue .switch-selection {
+    background: #3aa2d0;
+    background-image: -webkit-linear-gradient(top, #4fc9ee, #3aa2d0);
+    background-image: -moz-linear-gradient(top, #4fc9ee, #3aa2d0);
+    background-image: -o-linear-gradient(top, #4fc9ee, #3aa2d0);
+    background-image: linear-gradient(to bottom, #4fc9ee, #3aa2d0);
+  }
+  .switch-yellow .switch-selection {
+    background: #c4bb61;
+    background-image: -webkit-linear-gradient(top, #e0dd94, #c4bb61);
+    background-image: -moz-linear-gradient(top, #e0dd94, #c4bb61);
+    background-image: -o-linear-gradient(top, #e0dd94, #c4bb61);
+    background-image: linear-gradient(to bottom, #e0dd94, #c4bb61);
+  }
+  /* UBERMODE!!! SHOWS ALL THE THINGS!!! */
+  &.ubermode {
+    .perfBar-stats ul {
+      flex-wrap: wrap;
+    }
+    .perfBar-stats li {
+      padding: 10px 15px;
+    }
+  }
+}
+
+
+
+@media screen and (max-width: 699px){
+  #perfBar {
+    .perfBar-stats {
+      display: block;
+    }
+    .perfBar-stats ul,
+    .perfBar-switches {
+      width: 90%;
+    }
+    .perfBar-stats ul {
+      display: block;
+    }
+    .perfBar-stats li {
+       /*width: 20%;*/
+       float: left;
+    }
+  }
+}
+@media screen and (min-width: 700px){
+  #perfBar {
+    .perfBar-stats li {
+      width: inherit;
+    }
+    .perfBar-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .perfBar-stats ul,
+    .perfBar-switches {
+      display: flex;
+      width: inherit;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
