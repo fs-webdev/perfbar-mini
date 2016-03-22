@@ -1,9 +1,12 @@
+console.log('hi!')
+
 /*
  *  perfBarAddons, made to add a shared, s3-hosted budget json file, configurable pagetypes, connections to perfbar
  */
 
 // TODO: close the scope of this module off with a closure?
 (function(win,doc){
+var localDev = true; // for local debugging
 var perfBarAddons = win.perfBarAddons = {
   scenario: {},
   budget: {},
@@ -17,8 +20,8 @@ var perfBarAddons = win.perfBarAddons = {
  */
 var storageKey = 'fs-performance-budget';
 var scenarioKey = storageKey+'-scenario';
-var storedBudget = FS.sessionStorage.get(storageKey);
-var storedScenario = FS.sessionStorage.get(scenarioKey);
+var storedBudget = JSON.parse(win.sessionStorage.getItem(storageKey));
+var storedScenario = JSON.parse(win.sessionStorage.getItem(scenarioKey));
 //measure time from start to around perfbar init.
 console.time('getBudget');
 // don't need to check for date staleness, since this is sessionStorage, it expires when tab or browser is closed
@@ -44,7 +47,7 @@ if(storedBudget){
 }
 
 function getNewData(cb){
-  var budgetURL = '//edge.fscdn.org/assets/budgets/performance-budget-jsonp.min.json';
+  var budgetURL = localDev ? 'https://edge.fscdn.org/assets/budgets/performance-budget-jsonp.min.json' : '//edge.fscdn.org/assets/budgets/performance-budget-jsonp.min.json';
   // vanillaJS AJAX jsonp call
   var scr = document.createElement('script');
   scr.src = budgetURL;
@@ -60,7 +63,7 @@ function getNewData(cb){
 
 function storeNewData(data, cb) {
   perfBarAddons.budget = data;
-  FS.sessionStorage.set(storageKey, data);
+  win.sessionStorage.setItem(storageKey, JSON.stringify(data));
   if(cb) cb(data);
 }
 
@@ -85,7 +88,7 @@ function setScenario(pageType, connection, cb){
 // save persistent scenario state
 function storeNewScenario(data, cb) {
   if(data.pageType && data.connection){
-    FS.sessionStorage.set(scenarioKey, data);
+    win.sessionStorage.setItem(scenarioKey, JSON.stringify(data));
     if(cb) cb(data);
   } else {
     if(cb) cb();
@@ -119,7 +122,6 @@ function initPerfBar(budget){
     budget: maxBudget
   });
 }
-
 function updatePerfBar(currentBudget){
   // update each metric with the new scenario's budget max numbers
   // for(var key in currentBudget) {

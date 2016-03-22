@@ -3,9 +3,62 @@
   <head>
     <meta charset="utf-8">
     <title>Test PerfBar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../dist/perfbar.css"> -->
+    <link rel="stylesheet" href="../dist/perfbar-mini.css">
   </head>
   <body>
-    <h1>Test PerfBar</h1>
-    <script src="../dist/perfbar.js"></script>
+    <h1 style="font-family: Verdana, sans-serif">Test PerfBar</h1>
+    <!-- <div id="perfbar-mini" class="perfbar-mini">
+      <div class="metrics">
+        <div class="metric metric-back-end">
+          <span>TTFB</span>
+          <span class="number fail">200</span>
+        </div>
+        <div class="metric metric-front-end">
+          <span>First Paint</span>
+          <span class="number pass">800</span>
+        </div>
+        <div class="metric metric-load">
+          <span>Total Load</span>
+          <span class="number pass">2400</span>
+        </div>
+      </div> -->
+      <!-- HIDE SWITCHES BY DEFAULT. CAN OPEN TO SHOW THEM -->
+      <!-- <form class="switches">
+        <div class="switch switch-pagetype">Pagetype:
+          <input id="pagetype-landing" type="radio" name="pagetype" value="landing">
+          <label for="pagetype-landing">Landing</label>
+          <input id="pagetype-general" type="radio" name="pagetype" value="general">
+          <label for="pagetype-general">General</label>
+          <input id="pagetype-baseline" type="radio" name="pagetype" value="baseline">
+          <label for="pagetype-baseline">Baseline</label>
+        </div>
+        <div class="switch switch-connection">Connection:
+          <input id="connection-cable" type="radio" name="connection" value="cable">
+          <label for="connection-cable">Cable</label>
+          <input id="connection-3G" type="radio" name="connection" value="3G">
+          <label for="connection-3G">3G</label>
+          <input id="connection-2G" type="radio" name="connection" value="2G">
+          <label for="connection-2G">2G</label>
+        </div>
+      </form> -->
+    <!-- </div> -->
+    <script src="../dist/justice.min.js"></script>
+    <script type="text/javascript">
+      fsJustice.init({
+        metrics: {
+          TTFB:             { budget: 200   },
+          domInteractive:   { budget: 250   },
+          domComplete:      { budget: 800   },
+          firstPaint:       { budget: 1000  },
+          pageLoad:         { budget: 2000  },
+          requests:         { budget: 6     },
+        },
+        warnThreshold: 0.8,
+        showFPS: true,
+        chartType: 'spline'
+      });
+    </script>
   </body>
 </html>
