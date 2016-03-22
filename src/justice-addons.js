@@ -119,10 +119,11 @@ function storeNewScenario(data, cb) {
 
 var defaultConfig;
 
-function init(userConfig){
+function init(){
+  console.log(arguments);
   var config = defaultConfig;                               // set default config to defaultConfig
-  if (userConfig) {
-    config = mergeRecursive(defaultConfig, userConfig);     // if user passes in overrides, use them
+  if (arguments.length > 0) {
+    config = mergeRecursive(defaultConfig, arguments[0]);     // if user passes in overrides, use them
   }
   console.log('CONFIG:',config)
   Justice.init(config);
@@ -157,13 +158,13 @@ function initPerfBar(budget){
       requests:         { budget: 6 }
     },
     warnThreshold: 0.8,
-    showFPS: true,
+    showFPS: false,
     chartType: 'spline'
   };
   
   /* INIT */
-  win.fsJustice = {
-    init: init()
+  window.fsJustice = {
+    init: init
   }
     
 }
