@@ -5,62 +5,89 @@
     <title>Test PerfBar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../dist/perfbar.css"> -->
+    <link href='https://fonts.googleapis.com/css?family=Slabo+13px|Roboto' rel='stylesheet' type='text/css'>
+    <style>
+      p {
+        font-family: 'Roboto', sans-serif;
+      }
+      h1,h2,h3,h4,h5,h6 {
+        font-family: 'Slabo 13px', serif;
+      }
+    </style>
     <link rel="stylesheet" href="../dist/perfbar-mini.css">
   </head>
   <body>
-    <h1 style="font-family: Verdana, sans-serif">Test PerfBar</h1>
-    <!-- <div id="perfbar-mini" class="perfbar-mini">
-      <div class="metrics">
-        <div class="metric metric-back-end">
-          <span>TTFB</span>
-          <span class="number fail">200</span>
-        </div>
-        <div class="metric metric-front-end">
-          <span>First Paint</span>
-          <span class="number pass">800</span>
-        </div>
-        <div class="metric metric-load">
-          <span>Total Load</span>
-          <span class="number pass">2400</span>
-        </div>
-      </div> -->
-      <!-- HIDE SWITCHES BY DEFAULT. CAN OPEN TO SHOW THEM -->
-      <!-- <form class="switches">
-        <div class="switch switch-pagetype">Pagetype:
-          <input id="pagetype-landing" type="radio" name="pagetype" value="landing">
-          <label for="pagetype-landing">Landing</label>
-          <input id="pagetype-general" type="radio" name="pagetype" value="general">
-          <label for="pagetype-general">General</label>
-          <input id="pagetype-baseline" type="radio" name="pagetype" value="baseline">
-          <label for="pagetype-baseline">Baseline</label>
-        </div>
-        <div class="switch switch-connection">Connection:
-          <input id="connection-cable" type="radio" name="connection" value="cable">
-          <label for="connection-cable">Cable</label>
-          <input id="connection-3G" type="radio" name="connection" value="3G">
-          <label for="connection-3G">3G</label>
-          <input id="connection-2G" type="radio" name="connection" value="2G">
-          <label for="connection-2G">2G</label>
-        </div>
-      </form> -->
-    <!-- </div> -->
+    <h1>Test fsJustice</h1>
+    <img width="100%" src="http://i401.photobucket.com/albums/pp98/dustyemu/emu_face001.jpg" alt="Curious Emu" />
+    <p>Bacon ipsum dolor amet do nostrud eiusmod, ball tip lorem deserunt salami est. Prosciutto incididunt tongue cow id. Chicken ball tip bacon commodo dolor biltong jowl. Alcatra dolor tempor, officia tongue exercitation quis short ribs t-bone picanha spare ribs pork chop ut reprehenderit culpa. Sunt cillum ut laborum, short loin reprehenderit quis chicken. Est ut dolor deserunt doner, turkey pork chop chicken kielbasa laboris shankle sirloin excepteur swine fatback.</p>
+    <img width="100%" src="http://graceport.com/uploads/2014/05/emu.jpg" alt="" />
+    <p>Pork belly do duis irure pork chop turkey officia dolore. Prosciutto veniam ullamco tri-tip, filet mignon turkey kevin picanha sint. Sed porchetta esse cillum. Leberkas cupidatat dolor do. Non beef ribs shank voluptate, sunt rump doner consectetur flank capicola laborum porchetta. Officia sausage tempor shank tongue quis. Dolore aliqua ullamco ham aliquip beef sirloin consectetur ut picanha chuck enim officia labore.</p>
+    <img width="100%" src="https://pbs.twimg.com/profile_images/428040314188611584/q-TUT4NW.jpeg" alt="" />
+    <p>Rump pork turkey fugiat. Pancetta enim cupidatat prosciutto magna. Proident in eu picanha duis leberkas occaecat shank enim rump meatball turducken shankle et id. Est kevin kielbasa consequat ea tongue.</p>
+    <img width="100%" src="http://2014hoaxblog.s3.amazonaws.com/2014savage_emu.jpg" alt="" />
+    <p>Drumstick qui laboris eiusmod consequat fatback. Sausage nisi pork chop reprehenderit sed pastrami andouille shoulder commodo shankle fatback ex do. Fatback filet mignon pork chop, t-bone andouille ham deserunt do cupim short ribs corned beef eu. Tempor in occaecat reprehenderit cillum, id ham hock tri-tip. Swine sirloin occaecat excepteur tongue boudin bacon flank chicken strip steak andouille sausage enim biltong. Spare ribs ea pork chop, landjaeger ad mollit sed qui. Meatball drumstick boudin voluptate velit anim consectetur duis.</p>
+    <img width="100%" src="http://www.lonelyplanet.com/news/wp-content/uploads/2015/09/Emu.png" alt="" />
+    <p>Ribeye nisi aliqua, labore minim exercitation kielbasa chuck. Rump officia shoulder frankfurter beef ribs labore strip steak ut leberkas tri-tip ut magna quis velit doner. In jowl ullamco shoulder short ribs kielbasa enim meatloaf laborum cupim. Ut fugiat in hamburger, in ribeye meatloaf. Elit lorem excepteur, occaecat labore frankfurter aliquip.</p>
     <script src="../dist/justice.min.js"></script>
     <script type="text/javascript">
-      fsJustice.init({
-        metrics: {
-          TTFB:             { budget: 200   },
-          domInteractive:   { budget: 250   },
-          domComplete:      { budget: 800   },
-          firstPaint:       { budget: 1000  },
-          pageLoad:         { budget: 2000  },
-          requests:         { budget: 6     },
+      fsJustice({
+        budgets: {
+          "cable-desktop": {
+            "LoadTime": {
+              "A": 1,
+              "B": 2,
+              "C": 3,
+              "D": 4
+            },
+            "Latency": {
+              "A": 1,
+              "B": 2,
+              "C": 3,
+              "D": 4
+            },
+            "FirstPaint": {
+              "A": 1,
+              "B": 2,
+              "C": 3,
+              "D": 4
+            }
+          },
+          "3G-mobile": {
+            "LoadTime": {
+              "A": 5,
+              "B": 6,
+              "C": 7,
+              "D": 8
+            },
+            "Latency": {
+              "A": 5,
+              "B": 6,
+              "C": 7,
+              "D": 8
+            },
+            "FirstPaint": {
+              "A": 5,
+              "B": 6,
+              "C": 7,
+              "D": 8
+            }
+          }
         },
-        warnThreshold: 0.8,
-        showFPS: true,
-        chartType: 'spline',
-        addons: { // Justice Addons Config
-          pageType: 'landing',
-          connection: '3G'
+        pageType: 'landing',                // custom default pagetype for budget scenario
+        defaultConnection: '3G-mobile',     // custom default connectionType for budget scenario
+        gradeGoal: 'B',
+        justice: {
+          // metrics: { // custom local budget overrides
+            // TTFB:             { budget: 200   },
+            // domInteractive:   { budget: 250   },
+            // domComplete:      { budget: 800   },
+            // firstPaint:       { budget: 1000  },
+            // pageLoad:         { budget: 2000  },
+            // requests:         { budget: 6     },
+          // },
+          // warnThreshold: 0.8,
+          showFPS: true,
+          // chartType: 'spline'
         }
       }
     );

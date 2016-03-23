@@ -1,4 +1,3 @@
-console.log('hi!')
 
 /*
  *  perfBarAddons, made to add a shared, s3-hosted budget json file, configurable pagetypes, connections to perfbar
@@ -122,6 +121,7 @@ function initPerfBar(budget){
     budget: maxBudget
   });
 }
+
 function updatePerfBar(currentBudget){
   // update each metric with the new scenario's budget max numbers
   // for(var key in currentBudget) {
