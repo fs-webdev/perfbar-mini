@@ -25,9 +25,10 @@ window.fsJustice = function(){
   if(arguments.length > 0){
     config = arguments[0];
   }
+  config.gradeGoal = config.gradeGoal || 'D'; // set default gradeGoal to 'D' unless specified
   (function(win,doc){
     var localDev = true; // for local debugging
-    var perfBarAddons = {
+    var perfBarAddons = window.perfBarAddons = {
       scenario: {},
       budget: {},
       currentBudget: {}
@@ -49,9 +50,9 @@ window.fsJustice = function(){
 
     // Set performance budget scenario
     // read persistent state, if exists
-    // if(storedScenario){
-    //   setScenario(storedScenario.pageType, storedScenario.connection);
-    // } else {
+    if(storedScenario){
+      setScenario(storedScenario.pageType, storedScenario.connection);
+    } else {
       if(config.pageType){
         perfBarAddons.scenario.pageType = config.pageType;            // default state
       } else {
@@ -63,16 +64,14 @@ window.fsJustice = function(){
         perfBarAddons.scenario.connection = 'cable-desktop';          // default state
       }
       setScenario(perfBarAddons.scenario.pageType, perfBarAddons.scenario.connection);
-    // }
+    }
 
     if(storedBudget){
       perfBarAddons.budget = storedBudget;
-      console.log('budget Stored', perfBarAddons.budget);
       initPerfBar(perfBarAddons.budget);
     } else {
       getNewData(function(data){
         perfBarAddons.budget = data;
-        console.log('budget Gotten', perfBarAddons.budget);
         initPerfBar(data);
       });
     }
@@ -106,8 +105,6 @@ window.fsJustice = function(){
       if(connection){
         perfBarAddons.scenario.connection = connection;
       }
-      // ubermode set to off by default, because its crazy.
-      perfBarAddons.scenario.ubermode = 'off';
       storeNewScenario({
         pageType: perfBarAddons.scenario.pageType,
         connection: perfBarAddons.scenario.connection
@@ -126,21 +123,19 @@ window.fsJustice = function(){
         if(cb) cb();
       }
     }
-
+    
 
     var defaultJusticeConfig; // hoisted
 
 
     function init(){
-      console.log(arguments);
       var initConfig = defaultJusticeConfig;                               // set default config to defaultJusticeConfig
       if (arguments.length > 0) {
+        // set page default scenario
         initConfig = mergeRecursive(defaultJusticeConfig, arguments[0]);     // if user passes in overrides, use them
       }
-      console.log('CONFIG:',config)
-      // set page default scenario
-      
       Justice.init(initConfig);
+      afterRender();  // do things that happen after justice ui render
     }
 
 
@@ -152,24 +147,27 @@ window.fsJustice = function(){
       var currentBudget = config.budgets ? perfBarAddons.currentBudget = config.budgets[perfBarAddons.scenario.connection] : perfBarAddons.currentBudget = budget[perfBarAddons.scenario.pageType][perfBarAddons.scenario.connection];
       var maxBudget = {
         'loadTime': {
-          max: config.gradeGoal ? currentBudget.LoadTime[config.gradeGoal] : currentBudget.LoadTime.D // Lower than D = "F" in category. P1 until raised to a "D"
+          max: currentBudget.LoadTime[config.gradeGoal]
         },
         'latency': {
-          max: config.gradeGoal ? currentBudget.Latency[config.gradeGoal] : currentBudget.Latency.D // Lower than D = "F" in category. P1 until raised to a "D"
+          max: currentBudget.Latency[config.gradeGoal]
         },
         'FirstPaint': {
-          max: config.gradeGoal ? currentBudget.FirstPaint[config.gradeGoal] : currentBudget.FirstPaint.D // Lower than D = "F" in category. P1 until raised to a "D"
+          max: currentBudget.FirstPaint[config.gradeGoal]
         }
       };
+      if(currentBudget.domInteractive) {
+        maxBudget.domInteractive = currentBudget.FirstPaint[config.gradeGoal];
+      }
 
       defaultJusticeConfig = {
         metrics: {
           TTFB:             { budget: maxBudget.latency.max },
-          domInteractive:   { budget: 250 },
-          domComplete:      { budget: 100 },
+          domInteractive:   { budget: maxBudget.domInteractive ? maxBudget.domInteractive.max : 250 },
+          domComplete:      { budget: maxBudget.domComplete ? maxBudget.domComplete.max : 100 },
           firstPaint:       { budget: maxBudget.FirstPaint.max || 1000 },
           pageLoad:         { budget: maxBudget.loadTime.max || 2000 },
-          requests:         { budget: 6 }
+          requests:         { budget: maxBudget.requests ? maxBudget.requests.max : 6 }
         },
         warnThreshold: 0.8,
         showFPS: false,
@@ -183,8 +181,99 @@ window.fsJustice = function(){
     }
 
 
-    function updatePerfBar(currentBudget){
-      location.reload(); // override with page reload
+    function updatePerfBar(){
+      win.location.reload(); // override with page reload
+    }
+    
+    function afterRender() { // do things after justice UI has been rendered
+      win.requestAnimationFrame(function(){
+        var ui = document.getElementById('justice');
+        if(!ui) {
+          return afterRender();
+        } else {
+          loadDeferreds();
+        }
+      });
+    }
+    
+    function loadDeferreds(){
+      // return checked if item matches scenario
+      function isChecked(type, value) {
+        var checked = '';
+        if(type == 'pageType'){
+          checked = (perfBarAddons.scenario.pageType == value) ? 'checked' : '';
+        }
+        if(type == 'connection'){
+          checked = (perfBarAddons.scenario.connection == value) ? 'checked' : '';
+        }
+        return checked;
+      }
+
+      // create new content for perfbar
+      var switches = doc.createElement('div');
+      switches.innerHTML = ''+
+      '<div class="justice-switch">'+
+        '<abbr title="Compare page against different budgets per pagetype">'+
+          '<h5 class="perfBar-label">Pagetype:</h3>'+
+          '<div class="switch">'+
+            '<input type="radio" class="switch-input" name="pagetype" value="landing" id="landing" onclick="perfBarAddons.handleSwitchClick(this)" ' + isChecked('pageType', 'landing') + '>'+
+            '<label for="landing" class="switch-label switch-label-off">Landing</label>'+
+            '<input type="radio" class="switch-input" name="pagetype" value="general" id="general" onclick="perfBarAddons.handleSwitchClick(this)" ' + isChecked('pageType', 'general') + '>'+
+            '<label for="general" class="switch-label switch-label-on">General</label>'+
+            '<span class="switch-selection"></span>'+
+          '</div>'+
+        '</abbr>'+
+      '</div>'+
+      '<div class="justice-switch">'+
+        '<abbr title="Compare page against different budgets per connection type">'+
+          '<h5 class="perfBar-label">Connection:</h3>'+
+          '<div class="switch">'+
+            '<input type="radio" class="switch-input" name="connection" value="cable-desktop" id="cable-desktop" onclick="perfBarAddons.handleSwitchClick(this)" ' + isChecked('connection', 'cable-desktop') + '>'+
+            '<label for="cable-desktop" class="switch-label switch-label-off">Cable</label>'+
+            '<input type="radio" class="switch-input" name="connection" value="3G-mobile" id="3G-mobile" onclick="perfBarAddons.handleSwitchClick(this)" ' + isChecked('connection', '3G-mobile') + '>'+
+            '<label for="3G-mobile" class="switch-label switch-label-on">3G</label>'+
+            '<span class="switch-selection"></span>'+
+          '</div>'+
+        '</abbr>'+
+      '</div>';
+
+      switches.className = 'justice-scenarios closed';
+      switches.id = 'justice-scenarios';
+      
+      var switchToggle = doc.createElement('div');
+      switchToggle.className = 'justice-switch-toggle';
+      switchToggle.innerHTML = '<span id="justice-switch-toggle-button" onclick="perfBarAddons.handleSwitchToggleClick()">+</span>';
+      
+      var statsElem = doc.getElementById('justice');
+      var scenariosElem = doc.querySelector('.justice-scenarios');
+
+      // inject new content onto perfbar
+      statsElem.appendChild(switchToggle, statsElem.firstChild);
+      statsElem.appendChild(switches, statsElem.firstChild);
+
+      // toggle switch area visibility
+      perfBarAddons.handleSwitchToggleClick = function() {
+        var switchElem = doc.getElementById('justice-scenarios');
+        switchElem.classList.toggle('closed');
+      }
+
+      // bind budget toggles
+      perfBarAddons.handleSwitchClick = function(myRadio) {
+        if(myRadio.name === 'pagetype'){
+          setScenario(myRadio.value, null, function() {
+            console.log('pagetype switch changed!');
+            updatePerfBar();
+          });
+        } else if(myRadio.name === 'connection') {
+          setScenario(null, myRadio.value, function() {
+            console.log('connection switch changed!');
+            updatePerfBar();
+          })
+        } else {
+          console.error('ERROR: Perfbar >> perfbarHandleClick : not a valid switch');
+        }
+        console.log('PerfBar: New performance budget scenario. Pagetype:',perfBarAddons.scenario.pageType,'Connection:',perfBarAddons.scenario.connection);
+      }
     }
 
   })(window,document);

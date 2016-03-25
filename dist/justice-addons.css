@@ -1,0 +1,142 @@
+#justice {
+  font-size: 13px;
+  font-family: "Verdana", sans-serif;
+}
+#justice .justice-metric-wrap {
+  justify-content: center;
+}
+#justice .justice-metric {
+  margin: 5px 5px 0 0;
+  height: inherit;
+}
+#justice .justice-switch-toggle {
+  color: #fff;
+  height: 10px;
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+}
+#justice .justice-switch-toggle > span {
+  color: #fff;
+  padding: 0.5em;
+  font-size: 20px;
+  font-weight: 700;
+  z-index: 2;
+}
+#justice .justice-scenarios {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+/* Switch design from: http://codepen.io/Thibaut/pen/iomak */
+}
+#justice .justice-scenarios.closed {
+  display: none;
+}
+#justice .justice-scenarios h5 {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Verdana", sans-serif;
+  margin: 0.5em 0em;
+}
+#justice .justice-scenarios .perfBar-switches {
+  padding: 0;
+  margin: 0 auto 10px;
+  color: #404040;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#justice .justice-scenarios .perfBar-switches > div {
+  padding: 5px 10px;
+}
+#justice .justice-scenarios .switch {
+  position: relative;
+  height: 26px;
+  width: 120px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 1px rgba(255,255,255,0.1);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 1px rgba(255,255,255,0.1);
+  background-color: #333;
+  border-radius: 4px;
+  margin: 0em 0.5em;
+}
+#justice .justice-scenarios .switch-label {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 58px;
+  line-height: 26px;
+  font-size: 11px;
+/*color: rgba(255, 255, 255, 0.35);*/
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.45);
+  cursor: pointer;
+}
+#justice .justice-scenarios .switch-label:active {
+  font-weight: bold;
+}
+#justice .justice-scenarios .switch-label-off {
+  padding-left: 2px;
+}
+#justice .justice-scenarios .switch-label-on {
+  padding-right: 2px;
+}
+#justice .justice-scenarios .switch-input {
+  display: none;
+}
+#justice .justice-scenarios .switch-input:checked + .switch-label {
+  font-weight: bold;
+/*color: rgba(0, 0, 0, 0.65);*/
+  color: #333;
+  text-shadow: 0 1px rgba(255,255,255,0.25);
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+  transition: 0.15s ease-out;
+}
+#justice .justice-scenarios .switch-input:checked + .switch-label-on ~ .switch-selection {
+/* Note: left: 50% doesn't transition in WebKit */
+  left: 60px;
+}
+#justice .justice-scenarios .switch-selection {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  left: 2px;
+  width: 58px;
+  height: 22px;
+  background: #65bd63;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(top, #9dd993, #65bd63);
+  background-image: -moz-linear-gradient(top, #9dd993, #65bd63);
+  background-image: -o-linear-gradient(top, #9dd993, #65bd63);
+  background-image: linear-gradient(to bottom, #9dd993, #65bd63);
+  -webkit-box-shadow: inset 0 1px rgba(255,255,255,0.5), 0 0 2px rgba(0,0,0,0.2);
+  box-shadow: inset 0 1px rgba(255,255,255,0.5), 0 0 2px rgba(0,0,0,0.2);
+  -webkit-transition: left 0.15s ease-out;
+  -moz-transition: left 0.15s ease-out;
+  -o-transition: left 0.15s ease-out;
+  transition: left 0.15s ease-out;
+}
+#justice .justice-scenarios .switch-blue .switch-selection {
+  background: #3aa2d0;
+  background-image: -webkit-linear-gradient(top, #4fc9ee, #3aa2d0);
+  background-image: -moz-linear-gradient(top, #4fc9ee, #3aa2d0);
+  background-image: -o-linear-gradient(top, #4fc9ee, #3aa2d0);
+  background-image: linear-gradient(to bottom, #4fc9ee, #3aa2d0);
+}
+#justice .justice-scenarios .switch-yellow .switch-selection {
+  background: #c4bb61;
+  background-image: -webkit-linear-gradient(top, #e0dd94, #c4bb61);
+  background-image: -moz-linear-gradient(top, #e0dd94, #c4bb61);
+  background-image: -o-linear-gradient(top, #e0dd94, #c4bb61);
+  background-image: linear-gradient(to bottom, #e0dd94, #c4bb61);
+}

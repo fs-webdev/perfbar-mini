@@ -11,7 +11,7 @@ var browserSync = require('browser-sync').create();
 var paths = {
   perfbar: ['./src/rum-speedindex.js','./src/perfbar.js','./src/perfbar-addons.js'],
   justice: ['./src/justice.min.js','./src/justice-addons.js'],
-  css: ['./src/perfbar.styl', './src/perfbar-mini.styl'],
+  css: ['./src/perfbar.styl', './src/perfbar-mini.styl', './src/justice-addons.styl'],
   dest: './dist',
   destJS: './dist/**/*.js'
 };
