@@ -20,21 +20,31 @@
     flex-direction: row-reverse
     align-items: flex-end
     
-    > span
+    
+    > a
       color: white
       padding: 0.5em
       font-size: 20px
       font-weight: 700
       z-index: 2
+      text-decoration: none
 
   .justice-scenarios
-    width:100%
+    width: 100%
+    margin: 1em auto
+    height: inherit
     display: flex
     flex-flow: wrap
     justify-content: center
+    transition: 400ms ease-in-out;
+    bottom: 0%
+    left: 0%
+    right: 0%
+    position: absolute
+    background: rgba(0,0,0,0.8)
     
     &.closed
-      display: none
+      transform: translateY(110%);
     
     h5
       color: white

@@ -17,22 +17,31 @@
   flex-direction: row-reverse;
   align-items: flex-end;
 }
-#justice .justice-switch-toggle > span {
+#justice .justice-switch-toggle > a {
   color: #fff;
   padding: 0.5em;
   font-size: 20px;
   font-weight: 700;
   z-index: 2;
+  text-decoration: none;
 }
 #justice .justice-scenarios {
   width: 100%;
+  margin: 1em auto;
+  height: inherit;
   display: flex;
   flex-flow: wrap;
   justify-content: center;
+  transition: 400ms ease-in-out;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  position: absolute;
+  background: rgba(0,0,0,0.8);
 /* Switch design from: http://codepen.io/Thibaut/pen/iomak */
 }
 #justice .justice-scenarios.closed {
-  display: none;
+  transform: translateY(110%);
 }
 #justice .justice-scenarios h5 {
   color: #fff;

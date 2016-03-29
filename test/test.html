@@ -31,80 +31,90 @@
     <script src="../dist/justice.min.js"></script>
     <script type="text/javascript">
       fsJustice({
-        budgets: {
-          "cable-desktop": {
-            "LoadTime": {
-              "A": 1,
-              "B": 2,
-              "C": 3,
-              "D": 4
-            },
-            "Latency": {
-              "A": 10,
-              "B": 20,
-              "C": 30,
-              "D": 40
-            },
-            "FirstPaint": {
-              "A": 1,
-              "B": 2,
-              "C": 3,
-              "D": 4
-            }
-          },
-          "3G-mobile": {
-            "domInteractive": {
-              "A": 5,
-              "B": 6,
-              "C": 7,
-              "D": 8
-            },
-            "domComplete": {
-              "A": 5,
-              "B": 6,
-              "C": 7,
-              "D": 8
-            },
-            "requests": {
-              "A": 5,
-              "B": 6,
-              "C": 7,
-              "D": 8
-            },
-            "LoadTime": {
-              "A": 5,
-              "B": 6,
-              "C": 7,
-              "D": 8
-            },
-            "Latency": {
-              "A": 5,
-              "B": 6,
-              "C": 7,
-              "D": 8
-            },
-            "FirstPaint": {
-              "A": 5,
-              "B": 6,
-              "C": 7,
-              "D": 8
-            }
-          }
-        },
+        // budgets: {
+        //   "cable-desktop": {
+        //     "domInteractive": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     },
+        //     "domComplete": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     },
+        //     "requests": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     },
+        //     "LoadTime": {
+        //       "A": 1,
+        //       "B": 2,
+        //       "C": 3,
+        //       "D": 4
+        //     },
+        //     "Latency": {
+        //       "A": 10,
+        //       "B": 20,
+        //       "C": 30,
+        //       "D": 40
+        //     },
+        //     "FirstPaint": {
+        //       "A": 1,
+        //       "B": 2,
+        //       "C": 3,
+        //       "D": 4
+        //     }
+        //   },
+        //   "3G-mobile": {
+        //     "domInteractive": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     },
+        //     "domComplete": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     },
+        //     "requests": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     },
+        //     "LoadTime": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     },
+        //     "Latency": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     },
+        //     "FirstPaint": {
+        //       "A": 5,
+        //       "B": 6,
+        //       "C": 7,
+        //       "D": 8
+        //     }
+        //   }
+        // },
         pageType: 'landing',                // custom default pagetype for budget scenario
         defaultConnection: '3G-mobile',     // custom default connectionType for budget scenario
-        gradeGoal: 'B',
+        gradeGoal: 'D',
         justice: {
-          // metrics: { // custom local budget overrides
-            // TTFB:             { budget: 200   },
-            // domInteractive:   { budget: 250   },
-            // domComplete:      { budget: 800   },
-            // firstPaint:       { budget: 1000  },
-            // pageLoad:         { budget: 2000  },
-            // requests:         { budget: 6     },
-          // },
           // warnThreshold: 0.8,
-          // showFPS: true,
+          showFPS: true,
           // chartType: 'spline'
         }
       }

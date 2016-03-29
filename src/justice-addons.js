@@ -242,7 +242,7 @@ window.fsJustice = function(){
       
       var switchToggle = doc.createElement('div');
       switchToggle.className = 'justice-switch-toggle';
-      switchToggle.innerHTML = '<span id="justice-switch-toggle-button" onclick="perfBarAddons.handleSwitchToggleClick()">+</span>';
+      switchToggle.innerHTML = '<a href="#" id="justice-switch-toggle-button" onclick="perfBarAddons.handleSwitchToggleClick(); return false;" title="Set Default Scenario">+</a>';
       
       var statsElem = doc.getElementById('justice');
       var scenariosElem = doc.querySelector('.justice-scenarios');
