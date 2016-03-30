@@ -20,7 +20,7 @@ function mergeRecursive(obj1, obj2) {
 }
 
 // Justice Addons module
-window.fsJustice = function(){
+window.perfBarMini = function(){
   var config = false;
   if(arguments.length > 0){
     config = arguments[0];
