@@ -2,6 +2,25 @@
 
 **A tiny bar that measures page performance live, based on Justice.js**  
 
+![PerfBarMini - No FPS](perfbar-mini-nofps.png)
+
+![PerfBarMini - Default](perfbar-mini.png)
+
+![PerfBarMini With Switches Open](perfbar-mini-switches.png)
+
+## What it does
+
+- Shows super-helpful performance metrics when open.
+- Compares current page perf against default and custom perf budgets
+- Can show Frames Per Second on realtime graph
+- Monitors the following metrics:
+  - Time to First Byte
+  - DOM Interactive Time
+  - DOM Complete Time
+  - First Paint Time (on supported browsers)
+  - Total Load Time (Fully Loaded)
+  - Number of Requests (on supported browsers)
+
 ## Usage
 
 Include the `dist/perfbar-mini.min.js` file just before the `</body>`.
