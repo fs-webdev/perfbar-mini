@@ -32,3 +32,84 @@ If you need more config, go for it:
 );
 </script>
 ```
+
+## Budget Format Example
+```json
+"cable-desktop": {
+   "domInteractive": {
+     "A": 500,
+     "B": 600,
+     "C": 700,
+     "D": 800
+   },
+   "domComplete": {
+     "A": 600,
+     "B": 700,
+     "C": 800,
+     "D": 900
+   },
+   "requests": {
+     "A": 5,
+     "B": 6,
+     "C": 7,
+     "D": 8
+   },
+   "LoadTime": {
+     "A": 1000,
+     "B": 2000,
+     "C": 3000,
+     "D": 4000
+   },
+   "Latency": {
+     "A": 100,
+     "B": 200,
+     "C": 300,
+     "D": 400
+   },
+   "FirstPaint": {
+     "A": 800,
+     "B": 900,
+     "C": 1000,
+     "D": 1100
+   }
+ },
+ "3G-mobile": {
+   "domInteractive": {
+     "A": 500,
+     "B": 600,
+     "C": 700,
+     "D": 800
+   },
+   "domComplete": {
+     "A": 600,
+     "B": 700,
+     "C": 800,
+     "D": 900
+   },
+   "requests": {
+     "A": 5,
+     "B": 6,
+     "C": 7,
+     "D": 8
+   },
+   "LoadTime": {
+     "A": 1000,
+     "B": 2000,
+     "C": 3000,
+     "D": 4000
+   },
+   "Latency": {
+     "A": 100,
+     "B": 200,
+     "C": 300,
+     "D": 400
+   },
+   "FirstPaint": {
+     "A": 800,
+     "B": 900,
+     "C": 1000,
+     "D": 1100
+   }
+ }
+}
+```
