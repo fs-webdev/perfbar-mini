@@ -5,16 +5,17 @@ var csso        = require('gulp-csso');
 var path        = require('path');
 var concat      = require('gulp-concat');
 var uglify      = require('gulp-uglify');
-var cssToJs     = require('gulp-css-to-js');
 var merge       = require('merge');
 var browserSync = require('browser-sync').create();
+var injectCSS   = require('gulp-css-to-js-style');
 
 // CONFIG
 var paths = {
+  srcDir: './src',
   perfbar: ['./src/rum-speedindex.js','./src/perfbar.js','./src/perfbar-addons.js'],
-  justice: ['./src/justice.min.js','./src/justice-addons.js'],
+  justice: ['./src/justice.min.js','./src/justice-addons.js','./src/justice-styles.js'],
   css: ['./src/perfbar.styl', './src/perfbar-mini.styl', './src/justice-addons.styl'],
-  justiceCSS: ['./src/justice-addons.css'],
+  justiceCSS: ['./dist/justice-addons.css'],
   dest: './dist',
   destJS: './dist/**/*.js'
 };
@@ -26,11 +27,16 @@ gulp.task('perfbar', function(){
     // .pipe(uglify())
     .pipe(gulp.dest(paths.dest));
 });
-gulp.task('justice', function(){
-  var jsStream  = gulp.src(paths.justice);
-  var cssStream = gulp.src(paths.justiceCSS)
-    // .pipe(cssToJs());
-    // merge(jsStream, cssStream)
+
+gulp.task('justice-styles-to-js', function(){
+  gulp.src(paths.justiceCSS)
+    .pipe(injectCSS())
+    .pipe(concat('justice-styles.js'))
+    .pipe(gulp.dest(paths.srcDir));
+});
+
+gulp.task('justice', ['justice-styles-to-js'], function(){
+  var jsStream  = gulp.src(paths.justice)
       .pipe(concat('justice.min.js'))
       // .pipe(uglify())
       .pipe(gulp.dest(paths.dest));
@@ -39,7 +45,7 @@ gulp.task('justice', function(){
 gulp.task('css', function(){
   gulp.src(paths.css)
     .pipe(stylus())
-    // .pipe(csso())
+    .pipe(csso())
     .pipe(gulp.dest(paths.dest))
     .pipe(browserSync.stream());
 })
@@ -49,7 +55,9 @@ gulp.task('browser-sync', function() {
   browserSync.init({
     server: {
       baseDir: "./"
-    }
+    },
+    startPath: '/test/index.html',
+    browser: ['google chrome', 'firefox', 'safari']
   });
 });
 

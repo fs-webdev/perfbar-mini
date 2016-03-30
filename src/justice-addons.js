@@ -134,6 +134,7 @@ window.fsJustice = function(){
         // set page default scenario
         initConfig = mergeRecursive(defaultJusticeConfig, arguments[0]);     // if user passes in overrides, use them
       }
+      win.console.log('Perfbar config:',initConfig);
       Justice.init(initConfig);
       afterRender();  // do things that happen after justice ui render
     }
