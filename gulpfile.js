@@ -37,8 +37,8 @@ gulp.task('justice-styles-to-js', function(){
 
 gulp.task('justice', ['justice-styles-to-js'], function(){
   var jsStream  = gulp.src(paths.justice)
-      .pipe(concat('justice.min.js'))
-      // .pipe(uglify())
+      .pipe(concat('perfbar-mini.min.js'))
+      .pipe(uglify())
       .pipe(gulp.dest(paths.dest));
 });
 
