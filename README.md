@@ -19,7 +19,7 @@ If you need more config, go for it:
 <script src="../dist/perfbar-mini.min.js"></script>
 <script type="text/javascript">
   perfBarMini({                         // (All configs optional)
-    budgets: {}                         // Budgets match schema of https://edge.fscdn.org/assets/budgets/index.html json files
+    budgets: {...}                         // Budgets match schema of https://edge.fscdn.org/assets/budgets/index.html json files
     pageType: 'landing',                // custom default pagetype for budget scenario
     defaultConnection: '3G-mobile',     // custom default connectionType for budget scenario
     gradeGoal: 'D',                     // Minimum Grade goal. If metric goes below this, it will fail. {A,B,C,D}
